@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: gmedia_democase
+      MYSQL_USER: gmedia_democase2
+      MYSQL_PASSWORD: Janglidalam29J
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./initsql:/docker-entrypoint-initdb.d/
+    
+    node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
